@@ -2,9 +2,9 @@ ext {
     compileSdkVersion = 28
     buildToolsVersion = '28.0.3'
     minSdkVersion = 16
-    targetSdkVersion =28
-    versionCode = 153
-    versionName = "0.0.1"
+    targetSdkVersion = 27
+    versionCode = 1
+    versionName = "0.0.0"
     javaVersion = JavaVersion.VERSION_1_8
 
     COMPONENT_DIR = rootProject.rootDir.absolutePath + "/gradle_component/"
@@ -35,6 +35,11 @@ ext {
     RXLIFECYCLE_VERSION = '0.3.0'
     GLIDE_VERSION = '3.7.0'
 
+    RXJAVA_VERSION2 = '2.1.0'
+    RXANDROID_VERSION2 = '2.1.0'
+    RETROFIT_VERSION2 = '2.2.0'
+    RXLIFECYCLE_VERSION2 = '2.2.2'
+
     FLEXLAYOUT_VERSION = '1.2.6'
     FLEXBOX_VERSION = '0.2.2'
     ZING_VERSION = '3.3.0'
@@ -43,6 +48,14 @@ ext {
     RETROFIT_VERSION = '2.3.0'
 
     OTHERDEPS = [
+            rxjava2                : "io.reactivex.rxjava2:rxjava:${RXJAVA_VERSION2}",
+            rxandroid2             : "io.reactivex.rxjava2:rxandroid:${RXANDROID_VERSION2}",
+            retrofit2              : "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION2}",
+            converter_gson2        : "com.squareup.retrofit2:converter-gson:${RETROFIT_VERSION2}",
+            adapter_rxjava2        : "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT_VERSION2}",
+            rxlifecycle2           : "com.trello.rxlifecycle2:rxlifecycle:${RXLIFECYCLE_VERSION2}",
+            rxlifecycle_components2 : "com.trello.rxlifecycle2:rxlifecycle-components:${RXLIFECYCLE_VERSION2}",
+
             androidutils          : 'com.wuxiaolong.androidutils:androidutils:1.0.2',
             leakcanary            : 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2',
             eventbus              : "de.greenrobot:eventbus:3.0.0-beta1",
@@ -50,11 +63,6 @@ ext {
             glide_compiler        : "com.github.bumptech.glide:compiler:4.8.0",
             flexlayout            : "com.github.mmin18:flexlayout:${FLEXLAYOUT_VERSION}",
             zxing                 : "com.google.zxing:core:${ZING_VERSION}",
-            rxjava                : "io.reactivex.rxjava2:rxjava:2.2.0",
-            rxandroid             : "io.reactivex.rxjava2:rxandroid:2.0.2",
-            retrofit              : "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}",
-            converter_gson        : "com.squareup.retrofit2:converter-gson:${RETROFIT_VERSION}",
-            adapter_rxjava        : "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0",
             utilcode               : "com.blankj:utilcode:1.20.1",
             findbugs              : 'com.google.code.findbugs:jsr305:2.0.1',
             mqttv3                : 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0',
@@ -83,7 +91,5 @@ ext {
     ]
 
     DEVDEPS = [
-//            butterknifeAnnotationProcessor: "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION",
-//            butterknifeCompile            : "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION",
     ]
 }

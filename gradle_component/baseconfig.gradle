@@ -72,18 +72,20 @@ dependencies {
     api rootProject.ext.SUPPORTDEPS.multidex
     api rootProject.ext.SUPPORTDEPS.recyclerView
 
+    api rootProject.ext.OTHERDEPS.rxlifecycle2
+    api rootProject.ext.OTHERDEPS.rxlifecycle_components2
+    api rootProject.ext.OTHERDEPS.retrofit2
+    api rootProject.ext.OTHERDEPS.converter_gson2
+    api rootProject.ext.OTHERDEPS.adapter_rxjava2
+    api rootProject.ext.OTHERDEPS.rxjava2
+    api rootProject.ext.OTHERDEPS.rxandroid2
+
     api rootProject.ext.OTHERDEPS.eventbus
     api rootProject.ext.OTHERDEPS.androidutils
     api rootProject.ext.OTHERDEPS.utilcode
-    api rootProject.ext.OTHERDEPS.rxlifecycle
-    api rootProject.ext.OTHERDEPS.rxlifecycle_components
     api rootProject.ext.OTHERDEPS.glide
     api rootProject.ext.OTHERDEPS.glide_compiler
-    api rootProject.ext.OTHERDEPS.retrofit
-    api rootProject.ext.OTHERDEPS.converter_gson
-    api rootProject.ext.OTHERDEPS.adapter_rxjava
     api rootProject.ext.OTHERDEPS.flexlayout
-    api rootProject.ext.OTHERDEPS.rxandroid
     api rootProject.ext.OTHERDEPS.rxbinding
     api rootProject.ext.OTHERDEPS.rxpermissions
     api rootProject.ext.OTHERDEPS.material_dialogs_core

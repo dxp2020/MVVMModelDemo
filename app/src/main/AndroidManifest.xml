@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.shangtao.mvvm">
+    package="com.shangtao.test">
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name=".activity.HomeActivity"
+            android:name="com.shangtao.activity.HomeActivity"
             android:screenOrientation="portrait"
             >
             <intent-filter>

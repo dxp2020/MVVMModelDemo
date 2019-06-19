@@ -5,11 +5,19 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import com.trello.rxlifecycle2.LifecycleProvider;
 
-public class MvvmViewModel extends AndroidViewModel implements IMvvmViewModel {
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
+
+public class MvvmViewModel extends AndroidViewModel implements LifecycleObserver {
     private LifecycleProvider lifecycle;
 
     public MvvmViewModel(@NonNull Application application) {
@@ -24,45 +32,32 @@ public class MvvmViewModel extends AndroidViewModel implements IMvvmViewModel {
         return lifecycle;
     }
 
-    @Override
-    public void onAny(LifecycleOwner owner, Lifecycle.Event event) {
+    public <T> void addSubscription(Observable<T> observable, Observer<T> subscriber) {
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(lifecycle.bindToLifecycle())
+                .subscribe(subscriber);
     }
 
-    @Override
-    public void onCreate() {
-    }
+    @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
+    public void onAny(LifecycleOwner owner, Lifecycle.Event event){}
 
-    @Override
-    public void onDestroy() {
-    }
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    public void onCreate(){}
 
-    @Override
-    public void onStart() {
-    }
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    public void onStart(){}
 
-    @Override
-    public void onStop() {
-    }
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void onResume(){}
 
-    @Override
-    public void onResume() {
-    }
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    public void onPause(){}
 
-    @Override
-    public void onPause() {
-    }
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onStop(){}
 
-    @Override
-    public void registerRxBus() {
-    }
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    public void onDestroy(){}
 
-    @Override
-    public void removeRxBus() {
-    }
-
-    public static final class ParameterField {
-        public static String CLASS = "CLASS";
-        public static String CANONICAL_NAME = "CANONICAL_NAME";
-        public static String BUNDLE = "BUNDLE";
-    }
 }
