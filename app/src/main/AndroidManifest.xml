@@ -2,7 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.shangtao.test">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name="com.shangtao.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +15,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name="com.shangtao.activity.HomeActivity"
+            android:name="com.shangtao.activity.home.HomeActivity"
             android:screenOrientation="portrait"
             >
             <intent-filter>

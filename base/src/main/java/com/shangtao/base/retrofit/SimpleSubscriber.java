@@ -3,23 +3,26 @@ package com.shangtao.base.retrofit;
 
 import android.content.Context;
 import com.shangtao.base.dialog.LoadingDialog;
+import com.shangtao.base.viewModel.BaseViewModel;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 public abstract class SimpleSubscriber<T> implements Observer<T> {
 
-    private LoadingDialog mLoading;
+    private BaseViewModel baseViewModel;
     private Disposable mDisposable;//相当于RxJava1.x中的Subscription,用于解除订阅
 
     public SimpleSubscriber() {
         super();
     }
 
-    public SimpleSubscriber(Context context) {
+    public SimpleSubscriber(BaseViewModel viewModel) {
         super();
-        mLoading = new LoadingDialog(context);
-        mLoading.show();
+        if (viewModel!=null) {
+            baseViewModel = viewModel;
+            baseViewModel.showDialog();
+        }
     }
 
     @Override
@@ -29,16 +32,16 @@ public abstract class SimpleSubscriber<T> implements Observer<T> {
 
     @Override
     public void onNext(T t) {
-        if(mLoading!=null){
-            mLoading.dismiss();
+        if(baseViewModel!=null){
+            baseViewModel.dismissDialog();
         }
         onSuccess(t);
     }
 
     @Override
     public void onError(Throwable e) {
-        if(mLoading!=null){
-            mLoading.dismiss();
+        if(baseViewModel!=null){
+            baseViewModel.dismissDialog();
         }
         onFailure(e);
         onComplete();

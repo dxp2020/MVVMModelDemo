@@ -1,4 +1,4 @@
-package com.shangtao.activity;
+package com.shangtao.activity.home;
 
 import android.view.View;
 
