@@ -15,7 +15,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name="com.shangtao.activity.home.HomeActivity"
+            android:name="com.shangtao.activity.home.TestActivity"
             android:screenOrientation="portrait"
             >
             <intent-filter>

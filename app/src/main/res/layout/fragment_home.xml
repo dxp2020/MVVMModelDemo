@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.shangtao.activity.home.TestActivityViewModel" />
+            type="com.shangtao.activity.home.TestFragmentViewModel" />
     </data>
 
     <LinearLayout
@@ -17,28 +17,10 @@
         >
 
         <Button
-            android:id="@+id/btn_mvp_activity"
+            android:id="@+id/btn_get"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mvp Activity Test"
-            android:textAllCaps="false"
-            binding:onClickCommand="@{viewModel.buttonClickCommand}"
-            />
-
-        <Button
-            android:id="@+id/btn_mvp_fragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mvp Fragment Test"
-            android:textAllCaps="false"
-            binding:onClickCommand="@{viewModel.buttonClickCommand}"
-            />
-
-        <Button
-            android:id="@+id/btn_mvp_dialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mvp Dialog Test"
+            android:text="获取天气"
             android:textAllCaps="false"
             binding:onClickCommand="@{viewModel.buttonClickCommand}"
             />
@@ -50,6 +32,7 @@
             android:layout_margin="20dp"
             android:text="@{viewModel.weatherObservable}"
             />
+
     </LinearLayout>
 
 </layout>
