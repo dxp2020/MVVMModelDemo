@@ -4,7 +4,7 @@ import android.view.View;
 
 import androidx.databinding.Observable;
 
-import com.shangtao.activity.home.TestActivityViewModel;
+import com.shangtao.base.model.jump.Static;
 import com.shangtao.base.view.BaseActivity;
 import com.shangtao.test.BR;
 import com.shangtao.test.R;
@@ -33,7 +33,7 @@ public class TestActivity extends BaseActivity<ActivityHomeBinding, TestActivity
                 }
                 switch (view.getId()){
                     case R.id.btn_mvp_fragment:
-
+                        Static.jumpToFragment(mActivity,TestFragment.class,null);
                         break;
                     case R.id.btn_mvp_dialog:
 

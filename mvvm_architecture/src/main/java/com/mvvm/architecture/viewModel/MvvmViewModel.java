@@ -18,25 +18,9 @@ import io.reactivex.schedulers.Schedulers;
 
 
 public class MvvmViewModel extends AndroidViewModel implements LifecycleObserver {
-    private LifecycleProvider lifecycle;
 
     public MvvmViewModel(@NonNull Application application) {
         super(application);
-    }
-
-    public void injectLifecycleProvider(LifecycleProvider lifecycle) {
-        this.lifecycle = lifecycle;
-    }
-
-    public LifecycleProvider getLifecycleProvider() {
-        return lifecycle;
-    }
-
-    public <T> void addSubscription(Observable<T> observable, Observer<T> subscriber) {
-        observable.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(lifecycle.bindToLifecycle())
-                .subscribe(subscriber);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
@@ -59,5 +43,22 @@ public class MvvmViewModel extends AndroidViewModel implements LifecycleObserver
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void onDestroy(){}
+
+    private LifecycleProvider lifecycle;
+
+    public void injectLifecycleProvider(LifecycleProvider lifecycle) {
+        this.lifecycle = lifecycle;
+    }
+
+    public LifecycleProvider getLifecycleProvider() {
+        return lifecycle;
+    }
+
+    public <T> void addSubscription(Observable<T> observable, Observer<T> subscriber) {
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(lifecycle.bindToLifecycle())
+                .subscribe(subscriber);
+    }
 
 }

@@ -15,4 +15,8 @@ public class TestFragment extends BaseFragment<FragmentHomeBinding, TestFragment
     public int initVariableId() {
         return BR.viewModel;
     }
+
+    public static TestFragment newInstance(){
+        return new TestFragment();
+    }
 }

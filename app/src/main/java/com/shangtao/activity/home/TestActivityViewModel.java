@@ -23,10 +23,10 @@ public class TestActivityViewModel extends BaseViewModel {
         super(application);
     }
 
-    public UIChangeObservable uc = new UIChangeObservable();
+    public ViewObservable uc = new ViewObservable();
 
-    public class UIChangeObservable {
-        public ObservableField<View> clickObservable = new ObservableField<>();
+    public class ViewObservable {
+         ObservableField<View> clickObservable = new ObservableField<>();
     }
 
     public ObservableField<String> weatherObservable = new ObservableField<>();
@@ -34,7 +34,7 @@ public class TestActivityViewModel extends BaseViewModel {
     public BindingCommand<View> buttonClickCommand = new BindingCommand<>(view -> {
         switch (view.getId()){
             case R.id.btn_mvp_activity:
-                loadData("101310222");
+                loadWeatherData("101310222");
                 break;
             case R.id.btn_mvp_fragment:
                 uc.clickObservable.set(view);
@@ -45,5 +45,23 @@ public class TestActivityViewModel extends BaseViewModel {
         }
     });
 
+    private void loadWeatherData(String cityId) {
+        addSubscription(apiStores.loadDataByRetrofitRxJava(cityId),
+                new SimpleSubscriber<MainModel>(this) {
+                    @Override
+                    public void onSuccess(MainModel model) {
+                        MainModel.WeatherinfoBean weatherinfo = model.getWeatherinfo();
+                        String showData = getApplication().getResources().getString(R.string.city) + weatherinfo.getCity()
+                                + getApplication().getResources().getString(R.string.wd) + weatherinfo.getWD()
+                                + getApplication().getResources().getString(R.string.ws) + weatherinfo.getWS()
+                                + getApplication().getResources().getString(R.string.time) + weatherinfo.getTime();
+                        weatherObservable.set(showData);
+                    }
+                    @Override
+                    public void onFailure(Throwable e) {
+                        weatherObservable.set("数据加载失败");
+                    }
+                });
+    }
 
 }

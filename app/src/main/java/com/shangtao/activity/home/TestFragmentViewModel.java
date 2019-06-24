@@ -13,24 +13,23 @@ import com.shangtao.base.viewModel.BaseViewModel;
 import com.shangtao.model.MainModel;
 import com.shangtao.retrofit.ApiStores;
 import com.shangtao.test.R;
+import com.shangtao.viewModel.BusinesstViewModel;
 
-public class TestFragmentViewModel extends BaseViewModel {
-
-    private ApiStores apiStores = ApiClient.retrofit().create(ApiStores.class);
-
-    private ObservableField<String> weatherObservable = new ObservableField<>();
+public class TestFragmentViewModel extends BusinesstViewModel {
 
     public TestFragmentViewModel(@NonNull Application application) {
         super(application);
     }
 
+    public ObservableField<String> weatherObservable = new ObservableField<>();
+
     public BindingCommand<View> buttonClickCommand = new BindingCommand<>(view -> {
         if (view.getId() == R.id.btn_get) {
-            loadData("101310222");
+            loadWeatherData("101310222");
         }
     });
 
-    private void loadData(String cityId) {
+    private void loadWeatherData(String cityId) {
         addSubscription(apiStores.loadDataByRetrofitRxJava(cityId),
                 new SimpleSubscriber<MainModel>(this) {
                     @Override
