@@ -54,11 +54,4 @@ public class MvvmViewModel extends AndroidViewModel implements LifecycleObserver
         return lifecycle;
     }
 
-    public <T> void addSubscription(Observable<T> observable, Observer<T> subscriber) {
-        observable.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(lifecycle.bindToLifecycle())
-                .subscribe(subscriber);
-    }
-
 }

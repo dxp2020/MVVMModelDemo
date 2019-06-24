@@ -2,14 +2,17 @@ package com.shangtao.base.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.ViewDataBinding;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.LogUtils;
-import com.mvvm.architecture.view.MvvmActivity;
-import com.mvvm.architecture.view.MvvmFragment;
+import com.mvvm.architecture.view.MvvmDialog;
 import com.shangtao.base.BaseApplication;
 import com.shangtao.base.dialog.LoadingDialog;
 import com.shangtao.base.viewModel.BaseViewModel;
@@ -17,23 +20,42 @@ import com.squareup.leakcanary.RefWatcher;
 
 import de.greenrobot.event.Subscribe;
 
-public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseViewModel>  extends MvvmFragment<V,VM> {
-    public MvvmActivity mActivity;
+public abstract class BaseDialog<V extends ViewDataBinding, VM extends BaseViewModel>  extends MvvmDialog<V,VM> {
+
+    public boolean isFullScreen;//是否全屏
+    private boolean isInitView;//是否初始化dialog的view
     private Bundle savedInstanceState;
     private LoadingDialog loadingDialog;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if(isFullScreen){
+            getDialog().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+        isInitView = mRootView==null;
+        return super.onCreateView(inflater,container,savedInstanceState);
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (savedInstanceState != null) {
-            handleRebuild(savedInstanceState);//处理Activity被杀死重建
-        }else{
+            //处理Activity被杀死重建
+            handleRebuild(savedInstanceState);
+        } else {
             init();
         }
     }
 
+    /**
+     * 初始化
+     */
     public void init() {
-        mActivity = (MvvmActivity)getActivity();
+        //此种情况，无需重新初始化，避免dismiss之后，重新初始化的问题
+        if(!isInitView&&savedInstanceState==null){
+            return;
+        }
         initParam();
         //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
         initViewObservable();
@@ -54,7 +76,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         if (loadingDialog != null) {
             loadingDialog.show();
         } else {
-            loadingDialog = new LoadingDialog(mActivity,title);
+            loadingDialog = new LoadingDialog(getContext(),title);
             loadingDialog.show();
         }
     }
@@ -89,11 +111,6 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     public void handleRebuild(Bundle savedInstanceState) {
         this.savedInstanceState = savedInstanceState;
         init();
-    }
-
-    //返回键处理
-    public boolean onBackPressed() {
-        return false;
     }
 
     //获取用于重建的Bundle，可用于重建或者判断是否重建

@@ -42,25 +42,12 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         if(ScreenUtils.isFullScreen(mActivity)&& BarUtils.isNavBarVisible(mActivity)) {
             BarUtils.setNavBarVisibility(mActivity,false);
         }
-        //注册EventBus
-        if (!EventBus.getDefault().isRegistered(this))
-            EventBus.getDefault().register(this);
-
         initParam();
         //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
         initViewObservable();
         //私有的ViewModel与View的契约事件回调逻辑
         registorLiveDataCallBack();
         initData();
-    }
-
-    /**
-     * 反初始化
-     */
-    private void uninit(){
-        if (EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().unregister(this);
-        }
     }
 
     //注册ViewModel与View的契约UI回调事件
@@ -89,7 +76,6 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        uninit();
         //监控内存泄露
         if (AppUtils.isAppDebug()) {
             try {
@@ -117,9 +103,5 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     public Bundle getSavedInstanceState() {
         return savedInstanceState;
     }
-
-    //event bus 事件处理，必须重写
-    @Subscribe
-    public void onEventMainThread(Intent pIntent) {}
 
 }
