@@ -36,11 +36,10 @@ public class TestActivity extends BaseActivity<ActivityHomeBinding, TestActivity
                         Static.jumpToFragment(mActivity,TestFragment.class,null);
                         break;
                     case R.id.btn_mvp_dialog:
-
+                        Static.jumpToFragment(mActivity,TestDialogFragment.class,null);
                         break;
                 }
             }
         });
-
     }
 }

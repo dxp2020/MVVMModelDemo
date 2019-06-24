@@ -32,16 +32,11 @@ public class TestActivityViewModel extends BaseViewModel {
     public ObservableField<String> weatherObservable = new ObservableField<>();
 
     public BindingCommand<View> buttonClickCommand = new BindingCommand<>(view -> {
-        switch (view.getId()){
-            case R.id.btn_mvp_activity:
-                loadWeatherData("101310222");
-                break;
-            case R.id.btn_mvp_fragment:
-                uc.clickObservable.set(view);
-                break;
-            case R.id.btn_mvp_dialog:
-                ToastUtils.showShort(((TextView)view).getText().toString());
-                break;
+        if (view.getId() == R.id.btn_mvp_activity) {
+            loadWeatherData("101310222");
+        } else if (view.getId() == R.id.btn_mvp_fragment
+                ||view.getId() == R.id.btn_mvp_dialog) {
+            uc.clickObservable.set(view);
         }
     });
 
