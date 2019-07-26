@@ -7,15 +7,13 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
 import com.shangtao.base.binding.command.BindingCommand;
-import com.shangtao.base.retrofit.ApiClient;
 import com.shangtao.base.retrofit.SimpleSubscriber;
 import com.shangtao.base.viewModel.BaseViewModel;
 import com.shangtao.model.MainModel;
-import com.shangtao.retrofit.ApiStores;
+import com.shangtao.model.cache.AppCache;
 import com.shangtao.test.R;
-import com.shangtao.viewModel.BusinesstViewModel;
 
-public class TestFragmentViewModel extends BusinesstViewModel {
+public class TestFragmentViewModel extends BaseViewModel {
 
     public TestFragmentViewModel(@NonNull Application application) {
         super(application);
@@ -30,7 +28,7 @@ public class TestFragmentViewModel extends BusinesstViewModel {
     });
 
     private void loadWeatherData(String cityId) {
-        addSubscription(apiStores.loadDataByRetrofitRxJava(cityId),
+        addSubscription(AppCache.getApiStores().loadDataByRetrofitRxJava(cityId),
                 new SimpleSubscriber<MainModel>(this) {
                     @Override
                     public void onSuccess(MainModel model) {

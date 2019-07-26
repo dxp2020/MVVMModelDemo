@@ -1,8 +1,6 @@
 package com.shangtao.base.retrofit;
 
 
-import android.content.Context;
-import com.shangtao.base.dialog.LoadingDialog;
 import com.shangtao.base.viewModel.BaseViewModel;
 
 import io.reactivex.Observer;

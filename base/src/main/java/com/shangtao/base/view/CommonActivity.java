@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 
 import com.shangtao.base.R;
@@ -14,11 +15,11 @@ import com.shangtao.base.BR;
 import com.shangtao.base.databinding.ActivityCommonBinding;
 import com.shangtao.base.model.jump.ActivityParams;
 import com.shangtao.base.model.jump.IFragmentParams;
-import com.shangtao.base.viewModel.CommonViewModel;
+import com.shangtao.base.viewModel.BaseViewModel;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class CommonActivity extends BaseActivity<ActivityCommonBinding, CommonViewModel> {
+public class CommonActivity extends BaseActivity<ActivityCommonBinding, BaseViewModel> {
     public static final String PARAMS = "params";
     
     @Override
@@ -35,7 +36,7 @@ public class CommonActivity extends BaseActivity<ActivityCommonBinding, CommonVi
     protected void initParam() {
         ActivityParams mParams = (ActivityParams) getIntent().getSerializableExtra(PARAMS);
         try {
-            Fragment fragment = null;
+            Fragment fragment;
             Class targetClass = mParams.getFragmentClazz();
             IFragmentParams mIFragmentParams = mParams.getFragmentParams();
             if (mIFragmentParams != null) {
@@ -71,7 +72,7 @@ public class CommonActivity extends BaseActivity<ActivityCommonBinding, CommonVi
         // 在Fragment中拦截返回事件
         boolean isReturn = false;
         for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-            if (fragment != null && fragment instanceof BaseFragment) {//可能null需判断
+            if (fragment instanceof BaseFragment) {
                 if ( ((BaseFragment) fragment).onBackPressed() ) {
                     isReturn = true;
                 }
@@ -84,31 +85,28 @@ public class CommonActivity extends BaseActivity<ActivityCommonBinding, CommonVi
         super.onBackPressed();
     }
 
-    @SuppressLint("RestrictedApi")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // super中回调Fragment的onActivityResult有问题，需自己回调Fragment的onActivityResult方法
         for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-            if (fragment != null) {//可能为null需判断
-                fragment.onActivityResult(requestCode, resultCode, data);
-            }
+            fragment.onActivityResult(requestCode, resultCode, data);
+            //如果有嵌套fragment也进行回调
             for (Fragment childFragment : fragment.getChildFragmentManager().getFragments()) {
-                if (childFragment != null) {//可能为null需判断
-                    childFragment.onActivityResult(requestCode, resultCode, data);
-                }
+                childFragment.onActivityResult(requestCode, resultCode, data);
             }
         }
     }
 
-    @SuppressLint("RestrictedApi")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         // super中回调Fragment的onRequestPermissionsResult有问题，需自己回调Fragment的onRequestPermissionsResult方法
         for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-            if (fragment != null) {//可能为null需判断
-                fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            //如果有嵌套fragment也进行回调
+            for (Fragment childFragment : fragment.getChildFragmentManager().getFragments()) {
+                childFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
             }
         }
     }

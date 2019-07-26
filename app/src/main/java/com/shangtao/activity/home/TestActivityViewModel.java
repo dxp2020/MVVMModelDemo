@@ -2,22 +2,18 @@ package com.shangtao.activity.home;
 
 import android.app.Application;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.shangtao.base.binding.command.BindingCommand;
-import com.shangtao.base.retrofit.ApiClient;
 import com.shangtao.base.retrofit.SimpleSubscriber;
 import com.shangtao.base.viewModel.BaseViewModel;
 import com.shangtao.model.MainModel;
-import com.shangtao.retrofit.ApiStores;
+import com.shangtao.model.cache.AppCache;
 import com.shangtao.test.R;
 
 public class TestActivityViewModel extends BaseViewModel {
-    private ApiStores apiStores = ApiClient.retrofit().create(ApiStores.class);
 
     public TestActivityViewModel(@NonNull Application application) {
         super(application);
@@ -41,7 +37,7 @@ public class TestActivityViewModel extends BaseViewModel {
     });
 
     private void loadWeatherData(String cityId) {
-        addSubscription(apiStores.loadDataByRetrofitRxJava(cityId),
+        addSubscription(AppCache.getApiStores().loadDataByRetrofitRxJava(cityId),
                 new SimpleSubscriber<MainModel>(this) {
                     @Override
                     public void onSuccess(MainModel model) {

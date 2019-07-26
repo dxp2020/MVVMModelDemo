@@ -4,6 +4,7 @@ import android.view.View;
 
 import androidx.databinding.Observable;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.shangtao.base.model.jump.Static;
 import com.shangtao.base.view.BaseActivity;
 import com.shangtao.test.BR;
@@ -36,7 +37,7 @@ public class TestActivity extends BaseActivity<ActivityHomeBinding, TestActivity
                         Static.jumpToFragment(mActivity,TestFragment.class,null);
                         break;
                     case R.id.btn_mvp_dialog:
-                        Static.jumpToFragment(mActivity,TestDialogFragment.class,null);
+                        ToastUtils.showShort("testing...");
                         break;
                 }
             }

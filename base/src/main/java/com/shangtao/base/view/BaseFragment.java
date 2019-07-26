@@ -1,6 +1,5 @@
 package com.shangtao.base.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -14,8 +13,6 @@ import com.shangtao.base.BaseApplication;
 import com.shangtao.base.dialog.LoadingDialog;
 import com.shangtao.base.viewModel.BaseViewModel;
 import com.squareup.leakcanary.RefWatcher;
-
-import de.greenrobot.event.Subscribe;
 
 public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseViewModel>  extends MvvmFragment<V,VM> {
     public MvvmActivity mActivity;
@@ -38,12 +35,13 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
         initViewObservable();
         //私有的ViewModel与View的契约事件回调逻辑
-        registorLiveDataCallBack();
+        registerLiveDataCallBack();
+
         initData();
     }
 
     //注册ViewModel与View的契约UI回调事件
-    private void registorLiveDataCallBack() {
+    private void registerLiveDataCallBack() {
         //加载对话框显示
         viewModel.getLiveData().getShowDialogEvent().observe(this, this::showDialog);
         //加载对话框消失
@@ -71,7 +69,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         //监控fragment泄露
         if (AppUtils.isAppDebug()) {
             try {
-                RefWatcher refWatcher = BaseApplication.getRefWatcher(getActivity());
+                RefWatcher refWatcher = BaseApplication.getRefWatcher(mActivity);
                 if(refWatcher!=null){
                     refWatcher.watch(this);
                 }
