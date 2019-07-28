@@ -4,17 +4,17 @@ import android.view.View;
 
 import androidx.databinding.Observable;
 
-import com.shangtao.base.model.jump.Static;
-import com.shangtao.base.activity.BaseActivity;
-import com.shangtao.test.BR;
+import com.shangtao.base.BR;
+import com.shangtao.base.activity.BaseFragment;
 import com.shangtao.test.R;
-import com.shangtao.test.databinding.ActivityHomeBinding;
+import com.shangtao.test.databinding.DialogHomeBinding;
 
-public class TestActivity extends BaseActivity<ActivityHomeBinding, TestActivityViewModel> {
+public class TestDialogFragment extends BaseFragment<DialogHomeBinding, TestDialogViewModel> {
+
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_home;
+        return R.layout.dialog_home;
     }
 
     @Override
@@ -32,14 +32,19 @@ public class TestActivity extends BaseActivity<ActivityHomeBinding, TestActivity
                     return;
                 }
                 switch (view.getId()){
-                    case R.id.btn_mvp_fragment:
-                        Static.jumpToFragment(mActivity,TestFragment.class,null);
+                    case R.id.btn_show_dialog:
+
                         break;
-                    case R.id.btn_mvp_dialog:
-                        Static.jumpToFragment(mActivity,TestDialogFragment.class,null);
+                    case R.id.btn_show_full_dialog:
+
                         break;
                 }
             }
         });
     }
+
+    public static TestDialogFragment newInstance(){
+        return new TestDialogFragment();
+    }
+
 }

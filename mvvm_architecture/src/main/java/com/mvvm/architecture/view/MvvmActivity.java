@@ -49,4 +49,15 @@ public abstract class MvvmActivity<V extends ViewDataBinding, VM extends MvvmVie
         return viewModel;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //解除ViewModel生命周期感应
+        getLifecycle().removeObserver(viewModel);
+        //解除DataBinding与Fragment之间的绑定
+        if(binding != null){
+            binding.unbind();
+        }
+    }
+
 }

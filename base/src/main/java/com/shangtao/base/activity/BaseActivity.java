@@ -109,18 +109,12 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         //监控内存泄露
         if (AppUtils.isAppDebug()) {
-            try {
-                RefWatcher refWatcher = BaseApplication.getRefWatcher(mActivity);
-                if(refWatcher!=null){
-                    refWatcher.watch(this);
-                }
-            } catch (Exception e) {
-                LogUtils.e(e);
-            }
+            RefWatcher refWatcher = BaseApplication.getRefWatcher(mActivity);
+            refWatcher.watch(this);
         }
     }
 
