@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.databinding.ViewDataBinding;
 
 import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.mvvm.architecture.view.MvvmFragment;
 import com.shangtao.base.BaseApplication;
 import com.shangtao.base.dialog.LoadingDialog;
@@ -75,6 +76,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     @Override
     public void onDestroy() {
         super.onDestroy();
+        KeyboardUtils.fixSoftInputLeaks(mActivity);
         //监控fragment泄露
         if (AppUtils.isAppDebug()) {
             RefWatcher refWatcher = BaseApplication.getRefWatcher(mActivity);

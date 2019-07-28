@@ -19,7 +19,6 @@ import androidx.lifecycle.ViewModelProviders;
 import com.mvvm.architecture.model.callback.MvvmCallBack;
 import com.mvvm.architecture.viewModel.MvvmViewModel;
 import com.trello.rxlifecycle2.components.support.RxDialogFragment;
-import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import org.jetbrains.annotations.NotNull;
 

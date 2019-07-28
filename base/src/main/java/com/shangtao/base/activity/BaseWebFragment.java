@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import androidx.databinding.ViewDataBinding;
 
 import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.mvvm.architecture.view.MvvmFragment;
 import com.shangtao.base.BaseApplication;
@@ -232,6 +233,7 @@ public abstract class BaseWebFragment<V extends ViewDataBinding, VM extends Base
     public void onDestroy() {
         WebViewSettings.destoryWebView(webView);
         super.onDestroy();
+        KeyboardUtils.fixSoftInputLeaks(mActivity);
         //监控fragment泄露
         if (AppUtils.isAppDebug()) {
             RefWatcher refWatcher = BaseApplication.getRefWatcher(mActivity);

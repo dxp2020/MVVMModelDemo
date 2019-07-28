@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.mvvm.architecture.model.callback.MvvmCallBack;
 import com.mvvm.architecture.viewModel.MvvmViewModel;
 import com.trello.rxlifecycle2.components.support.RxFragment;

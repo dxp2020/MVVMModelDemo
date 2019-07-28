@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.mvvm.architecture.view.MvvmActivity;
@@ -116,6 +117,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     @Override
     public void onDestroy() {
         super.onDestroy();
+        KeyboardUtils.fixSoftInputLeaks(this);
         //监控内存泄露
         if (AppUtils.isAppDebug()) {
             RefWatcher refWatcher = BaseApplication.getRefWatcher(mActivity);
