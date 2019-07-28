@@ -8,6 +8,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
 import com.mvvm.architecture.viewModel.MvvmViewModel;
+import com.shangtao.base.model.jump.Transaction;
 import com.shangtao.base.model.livedata.SingleLiveEvent;
 
 import de.greenrobot.event.EventBus;
@@ -72,6 +73,7 @@ public  class BaseViewModel extends  MvvmViewModel {
     public final class BaseLiveData extends SingleLiveEvent {
         private SingleLiveEvent<String> showDialogEvent;
         private SingleLiveEvent<Void> dismissDialogEvent;
+        private SingleLiveEvent<Transaction> pageJumpEvent;
 
         public SingleLiveEvent<String> getShowDialogEvent() {
             return showDialogEvent = createLiveData(showDialogEvent);
@@ -79,6 +81,10 @@ public  class BaseViewModel extends  MvvmViewModel {
 
         public SingleLiveEvent<Void> getDismissDialogEvent() {
             return dismissDialogEvent = createLiveData(dismissDialogEvent);
+        }
+
+        public SingleLiveEvent<Transaction> getPageJumpEvent() {
+            return pageJumpEvent = createLiveData(pageJumpEvent);
         }
 
         private SingleLiveEvent createLiveData(SingleLiveEvent liveData) {

@@ -9,5 +9,4 @@ public class IFragmentParams<T> implements Serializable {
     public IFragmentParams(T arg){
         this.params = arg;
     }
-
 }

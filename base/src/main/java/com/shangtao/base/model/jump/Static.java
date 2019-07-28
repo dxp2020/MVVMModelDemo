@@ -11,6 +11,17 @@ import com.shangtao.base.activity.CommonActivity;
 
 public class Static {
 
+    /**
+     * 启动一个Activity并显示Fragment
+     */
+    public static void jumpToFragment(Context context, Transaction transaction) {
+        if (transaction.isForResult()) {
+            jumpToFragmentForResult((Activity) context,transaction.getTargetClass(),transaction.getParams(),transaction.getRequestCode());
+        }else{
+            jumpToFragment(context,transaction.getTargetClass(),transaction.getParams());
+        }
+    }
+
 
     /**
      * 启动一个Activity并显示Fragment

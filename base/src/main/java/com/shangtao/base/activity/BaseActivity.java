@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.Observer;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.BarUtils;
@@ -13,6 +14,8 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.mvvm.architecture.view.MvvmActivity;
 import com.shangtao.base.BaseApplication;
 import com.shangtao.base.dialog.LoadingDialog;
+import com.shangtao.base.model.jump.IFragmentParams;
+import com.shangtao.base.model.jump.Static;
 import com.shangtao.base.model.language.LocaleManager;
 import com.shangtao.base.model.setting.AppSettings;
 import com.shangtao.base.model.utils.ImmersionBarUtil;
@@ -91,6 +94,8 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         viewModel.getLiveData().getShowDialogEvent().observe(this, this::showDialog);
         //加载对话框消失
         viewModel.getLiveData().getDismissDialogEvent().observe(this, v -> dismissDialog());
+        //处理页面跳转事件
+        viewModel.getLiveData().getPageJumpEvent().observe(this, transaction -> Static.jumpToFragment(mActivity,transaction));
     }
 
     public void showDialog(String title) {

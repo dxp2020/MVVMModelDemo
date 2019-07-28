@@ -25,6 +25,7 @@ import com.mvvm.architecture.view.MvvmFragment;
 import com.shangtao.base.BaseApplication;
 import com.shangtao.base.R;
 import com.shangtao.base.dialog.LoadingDialog;
+import com.shangtao.base.model.jump.Static;
 import com.shangtao.base.model.utils.ImmersionBarUtil;
 import com.shangtao.base.model.utils.L;
 import com.shangtao.base.model.utils.WebViewSettings;
@@ -204,6 +205,8 @@ public abstract class BaseWebFragment<V extends ViewDataBinding, VM extends Base
         viewModel.getLiveData().getShowDialogEvent().observe(this, this::showDialog);
         //加载对话框消失
         viewModel.getLiveData().getDismissDialogEvent().observe(this, v -> dismissDialog());
+        //处理页面跳转事件
+        viewModel.getLiveData().getPageJumpEvent().observe(this, transaction -> Static.jumpToFragment(mActivity,transaction));
     }
 
     public void showDialog() {

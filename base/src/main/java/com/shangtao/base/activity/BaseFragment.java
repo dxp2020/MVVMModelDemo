@@ -9,6 +9,7 @@ import com.blankj.utilcode.util.AppUtils;
 import com.mvvm.architecture.view.MvvmFragment;
 import com.shangtao.base.BaseApplication;
 import com.shangtao.base.dialog.LoadingDialog;
+import com.shangtao.base.model.jump.Static;
 import com.shangtao.base.model.utils.ImmersionBarUtil;
 import com.shangtao.base.viewModel.BaseViewModel;
 import com.squareup.leakcanary.RefWatcher;
@@ -52,6 +53,8 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         viewModel.getLiveData().getShowDialogEvent().observe(this, this::showDialog);
         //加载对话框消失
         viewModel.getLiveData().getDismissDialogEvent().observe(this, v -> dismissDialog());
+        //处理页面跳转事件
+        viewModel.getLiveData().getPageJumpEvent().observe(this, transaction -> Static.jumpToFragment(mActivity,transaction));
     }
 
     public void showDialog(String title) {

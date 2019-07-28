@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
 import com.shangtao.base.binding.command.BindingCommand;
+import com.shangtao.base.model.jump.Transaction;
 import com.shangtao.base.retrofit.SimpleSubscriber;
 import com.shangtao.base.viewModel.BaseViewModel;
 import com.shangtao.model.MainModel;
@@ -19,19 +20,18 @@ public class TestActivityViewModel extends BaseViewModel {
         super(application);
     }
 
-    public ViewObservable uc = new ViewObservable();
-
-    public class ViewObservable {
-         ObservableField<View> clickObservable = new ObservableField<>();
-    }
-
     public ObservableField<String> weatherObservable = new ObservableField<>();
 
     public BindingCommand<View> buttonClickCommand = new BindingCommand<>(view -> {
         if (view.getId() == R.id.btn_mvp_activity) {
             loadWeatherData("101310222");
-        } else if (view.getId() == R.id.btn_mvp_fragment||view.getId() == R.id.btn_mvp_dialog) {
-            uc.clickObservable.set(view);
+
+        } else if (view.getId() == R.id.btn_mvp_fragment) {
+            getLiveData().getPageJumpEvent().setValue(new Transaction(TestFragment.class));
+
+        } else if (view.getId() == R.id.btn_mvp_dialog) {
+            getLiveData().getPageJumpEvent().setValue(new Transaction(TestDialogFragment.class));
+
         }
     });
 
