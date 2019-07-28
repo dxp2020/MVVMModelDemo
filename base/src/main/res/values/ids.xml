@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="v_status_bar"/>
+    <item type="id" name="mtb_title_bar"/>
+    <item type="id" name="fl_container"/>
+    <item type="id" name="web_bar"/>
+
+</resources>

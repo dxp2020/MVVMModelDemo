@@ -35,9 +35,8 @@ public  class BaseViewModel extends  MvvmViewModel {
     public void onDestroy() {
         super.onDestroy();
         //注销EventBus
-        if (EventBus.getDefault().isRegistered(this)) {
+        if (EventBus.getDefault().isRegistered(this))
             EventBus.getDefault().unregister(this);
-        }
     }
 
     //event bus 事件处理，必须重写

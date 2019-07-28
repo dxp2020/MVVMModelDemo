@@ -1,31 +1,27 @@
-package com.shangtao.base.view;
+package com.shangtao.base.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.databinding.ViewDataBinding;
 
 import com.blankj.utilcode.util.AppUtils;
-import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.ScreenUtils;
-import com.mvvm.architecture.view.MvvmActivity;
+import com.mvvm.architecture.view.MvvmFragment;
 import com.shangtao.base.BaseApplication;
 import com.shangtao.base.dialog.LoadingDialog;
+import com.shangtao.base.model.utils.ImmersionBarUtil;
 import com.shangtao.base.viewModel.BaseViewModel;
 import com.squareup.leakcanary.RefWatcher;
 
-import de.greenrobot.event.EventBus;
-import de.greenrobot.event.Subscribe;
+public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseViewModel>  extends MvvmFragment<V,VM> {
 
-public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseViewModel>  extends MvvmActivity<V,VM> {
-    public MvvmActivity mActivity;
+    public BaseActivity mActivity;
     private Bundle savedInstanceState;
     private LoadingDialog loadingDialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         if (savedInstanceState != null) {
             handleRebuild(savedInstanceState);//处理Activity被杀死重建
         }else{
@@ -33,25 +29,25 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         }
     }
 
-    /**
-     * 初始化
-     */
     public void init() {
-        mActivity = this;
-        //全屏的情况下，隐藏导航栏
-        if(ScreenUtils.isFullScreen(mActivity)&& BarUtils.isNavBarVisible(mActivity)) {
-            BarUtils.setNavBarVisibility(mActivity,false);
-        }
-        initParam();
+        mActivity = (BaseActivity)getActivity();
+
+        //初始化沉侵式状态栏
+        ImmersionBarUtil.initImmersionBar(mActivity,mRootView);
+
         //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
         initViewObservable();
+
         //私有的ViewModel与View的契约事件回调逻辑
-        registorLiveDataCallBack();
+        registerLiveDataCallBack();
+
+        initParam();
+
         initData();
     }
 
     //注册ViewModel与View的契约UI回调事件
-    private void registorLiveDataCallBack() {
+    private void registerLiveDataCallBack() {
         //加载对话框显示
         viewModel.getLiveData().getShowDialogEvent().observe(this, this::showDialog);
         //加载对话框消失
@@ -74,18 +70,12 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
-        //监控内存泄露
+        //监控fragment泄露
         if (AppUtils.isAppDebug()) {
-            try {
-                RefWatcher refWatcher = BaseApplication.getRefWatcher(mActivity);
-                if(refWatcher!=null){
-                    refWatcher.watch(this);
-                }
-            } catch (Exception e) {
-                LogUtils.e(e);
-            }
+            RefWatcher refWatcher = BaseApplication.getRefWatcher(mActivity);
+            refWatcher.watch(this);
         }
     }
 
@@ -97,6 +87,11 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     public void handleRebuild(Bundle savedInstanceState) {
         this.savedInstanceState = savedInstanceState;
         init();
+    }
+
+    //返回键处理
+    public boolean onBackPressed() {
+        return false;
     }
 
     //获取用于重建的Bundle，可用于重建或者判断是否重建

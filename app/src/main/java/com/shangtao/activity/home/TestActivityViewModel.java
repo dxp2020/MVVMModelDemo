@@ -30,8 +30,7 @@ public class TestActivityViewModel extends BaseViewModel {
     public BindingCommand<View> buttonClickCommand = new BindingCommand<>(view -> {
         if (view.getId() == R.id.btn_mvp_activity) {
             loadWeatherData("101310222");
-        } else if (view.getId() == R.id.btn_mvp_fragment
-                ||view.getId() == R.id.btn_mvp_dialog) {
+        } else if (view.getId() == R.id.btn_mvp_fragment) {
             uc.clickObservable.set(view);
         }
     });

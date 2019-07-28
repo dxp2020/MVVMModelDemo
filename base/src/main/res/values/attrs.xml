@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="mula_title_bar">
+        <attr name="back_btn_src" format="reference"/>
+        <attr name="right_btn_src" format="reference"/>
+        <attr name="logo_img_src" format="reference"/>
+        <attr name="right_text" format="string"/>
+        <attr name="title_text" format="string"/>
+        <attr name="bg_color" format="color|reference" />
+        <attr name="text_color" format="color|reference" />
+        <attr name="bottom_line_color" format="color|reference" />
+    </declare-styleable>
+
+
+</resources>

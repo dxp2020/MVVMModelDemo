@@ -3,7 +3,7 @@ package com.shangtao.base.model.jump;
 
 
 
-import com.shangtao.base.view.BaseFragment;
+import com.shangtao.base.activity.BaseFragment;
 
 import java.io.Serializable;
 

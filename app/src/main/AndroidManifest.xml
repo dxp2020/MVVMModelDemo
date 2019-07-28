@@ -24,7 +24,7 @@
         </activity>
 
         <activity
-            android:name="com.shangtao.base.view.CommonActivity"
+            android:name="com.shangtao.base.activity.CommonActivity"
             android:screenOrientation="portrait"
             />
 

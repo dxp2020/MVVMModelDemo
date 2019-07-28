@@ -17,7 +17,7 @@ public class LoadingDialog extends Dialog {
 
     private Context context;
     private String message;
-    private boolean cancelable=true;
+    private boolean cancelable;
     private ImageView tipImage;
 
     public LoadingDialog(Context context) {

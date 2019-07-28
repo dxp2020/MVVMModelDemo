@@ -66,8 +66,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    api rootProject.ext.SUPPORTDEPS.appcompatV7
-    api rootProject.ext.SUPPORTDEPS.animated_vector_drawable
     api rootProject.ext.SUPPORTDEPS.design
     api rootProject.ext.SUPPORTDEPS.multidex
     api rootProject.ext.SUPPORTDEPS.recyclerView
@@ -81,15 +79,12 @@ dependencies {
     api rootProject.ext.OTHERDEPS.rxandroid2
 
     api rootProject.ext.OTHERDEPS.eventbus
-    api rootProject.ext.OTHERDEPS.androidutils
     api rootProject.ext.OTHERDEPS.utilcode
     api rootProject.ext.OTHERDEPS.glide
     api rootProject.ext.OTHERDEPS.glide_compiler
     api rootProject.ext.OTHERDEPS.flexlayout
     api rootProject.ext.OTHERDEPS.rxbinding
     api rootProject.ext.OTHERDEPS.rxpermissions
-    api rootProject.ext.OTHERDEPS.material_dialogs_core
-    api rootProject.ext.OTHERDEPS.material_dialogs_commons
     api rootProject.ext.OTHERDEPS.bindingcollectionadapter
     api rootProject.ext.OTHERDEPS.bindingcollectionadapte_recyclerview
     api rootProject.ext.OTHERDEPS.lifecycle_extensions

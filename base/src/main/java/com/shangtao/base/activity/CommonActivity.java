@@ -1,4 +1,4 @@
-package com.shangtao.base.view;
+package com.shangtao.base.activity;
 
 
 import android.annotation.SuppressLint;
@@ -7,7 +7,6 @@ import android.content.pm.ActivityInfo;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 
 import com.shangtao.base.R;
