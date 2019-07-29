@@ -28,6 +28,7 @@ import com.blankj.utilcode.util.AppUtils;
 import com.mvvm.architecture.view.MvvmDialog;
 import com.shangtao.base.BaseApplication;
 import com.shangtao.base.activity.BaseActivity;
+import com.shangtao.base.model.utils.FixMemLeak;
 import com.shangtao.base.viewModel.BaseViewModel;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -36,7 +37,6 @@ public abstract class BaseDialog<V extends ViewDataBinding, VM extends BaseViewM
 
     private BaseActivity mActivity;
     private Bundle savedInstanceState;
-    private LoadingDialog loadingDialog;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -63,27 +63,7 @@ public abstract class BaseDialog<V extends ViewDataBinding, VM extends BaseViewM
     }
 
     //注册ViewModel与View的契约UI回调事件
-    private void registerLiveDataCallBack() {
-        //加载对话框显示
-        viewModel.getLiveData().getShowDialogEvent().observe(this, this::showLoadingDialog);
-        //加载对话框消失
-        viewModel.getLiveData().getDismissDialogEvent().observe(this, v -> dismissLoadingDialog());
-    }
-
-    public void showLoadingDialog(String title) {
-        if (loadingDialog != null) {
-            loadingDialog.show();
-        } else {
-            loadingDialog = new LoadingDialog(mActivity,title);
-            loadingDialog.show();
-        }
-    }
-
-    public void dismissLoadingDialog() {
-        if (loadingDialog != null && loadingDialog.isShowing()) {
-            loadingDialog.dismiss();
-        }
-    }
+    public void registerLiveDataCallBack() {}
 
     @Override
     public void onDetach() {
@@ -121,6 +101,7 @@ public abstract class BaseDialog<V extends ViewDataBinding, VM extends BaseViewM
     @Override
     public void onDestroy() {
         super.onDestroy();
+        FixMemLeak.fixLeak(mActivity);
         //监控fragment泄露
         if (AppUtils.isAppDebug()) {
             RefWatcher refWatcher = BaseApplication.getRefWatcher(mActivity);

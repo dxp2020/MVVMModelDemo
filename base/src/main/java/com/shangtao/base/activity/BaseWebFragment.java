@@ -27,6 +27,7 @@ import com.shangtao.base.BaseApplication;
 import com.shangtao.base.R;
 import com.shangtao.base.dialog.LoadingDialog;
 import com.shangtao.base.model.jump.Static;
+import com.shangtao.base.model.utils.FixMemLeak;
 import com.shangtao.base.model.utils.ImmersionBarUtil;
 import com.shangtao.base.model.utils.L;
 import com.shangtao.base.model.utils.WebViewSettings;
@@ -233,7 +234,7 @@ public abstract class BaseWebFragment<V extends ViewDataBinding, VM extends Base
     public void onDestroy() {
         WebViewSettings.destoryWebView(webView);
         super.onDestroy();
-        KeyboardUtils.fixSoftInputLeaks(mActivity);
+        FixMemLeak.fixLeak(mActivity);
         //监控fragment泄露
         if (AppUtils.isAppDebug()) {
             RefWatcher refWatcher = BaseApplication.getRefWatcher(mActivity);

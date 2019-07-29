@@ -17,6 +17,7 @@
 package com.shangtao.base.model.livedata;
 
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
@@ -55,4 +56,10 @@ public class SingleLiveEvent<T> extends MutableLiveData<T> {
     public void call() {
         setValue(null);
     }
+
+    @MainThread
+    public void call(@Nullable T t) {
+        setValue(t);
+    }
+
 }

@@ -19,6 +19,7 @@ import com.shangtao.base.model.jump.IFragmentParams;
 import com.shangtao.base.model.jump.Static;
 import com.shangtao.base.model.language.LocaleManager;
 import com.shangtao.base.model.setting.AppSettings;
+import com.shangtao.base.model.utils.FixMemLeak;
 import com.shangtao.base.model.utils.ImmersionBarUtil;
 import com.shangtao.base.viewModel.BaseViewModel;
 import com.squareup.leakcanary.RefWatcher;
@@ -117,7 +118,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     @Override
     public void onDestroy() {
         super.onDestroy();
-        KeyboardUtils.fixSoftInputLeaks(this);
+        FixMemLeak.fixLeak(this);
         //监控内存泄露
         if (AppUtils.isAppDebug()) {
             RefWatcher refWatcher = BaseApplication.getRefWatcher(mActivity);

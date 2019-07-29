@@ -15,6 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.shangtao.base.view.MulaTitleBar
+            android:id="@+id/mtb_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:bg_color="@color/color_ffffff"
+            app:title_text="Dialog测试页"
+            />
+
         <Button
             android:id="@+id/btn_show_dialog"
             android:layout_width="wrap_content"
@@ -22,7 +30,6 @@
             android:text="显示对话框"
             binding:onClickCommand="@{viewModel.buttonClickCommand}"
             />
-
 
         <Button
             android:id="@+id/btn_show_full_dialog"

@@ -11,6 +11,7 @@ import com.mvvm.architecture.view.MvvmFragment;
 import com.shangtao.base.BaseApplication;
 import com.shangtao.base.dialog.LoadingDialog;
 import com.shangtao.base.model.jump.Static;
+import com.shangtao.base.model.utils.FixMemLeak;
 import com.shangtao.base.model.utils.ImmersionBarUtil;
 import com.shangtao.base.viewModel.BaseViewModel;
 import com.squareup.leakcanary.RefWatcher;
@@ -49,7 +50,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     }
 
     //注册ViewModel与View的契约UI回调事件
-    private void registerLiveDataCallBack() {
+    public void registerLiveDataCallBack() {
         //加载对话框显示
         viewModel.getLiveData().getShowDialogEvent().observe(this, this::showDialog);
         //加载对话框消失
@@ -76,7 +77,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     @Override
     public void onDestroy() {
         super.onDestroy();
-        KeyboardUtils.fixSoftInputLeaks(mActivity);
+        FixMemLeak.fixLeak(mActivity);
         //监控fragment泄露
         if (AppUtils.isAppDebug()) {
             RefWatcher refWatcher = BaseApplication.getRefWatcher(mActivity);

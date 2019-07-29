@@ -14,9 +14,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:paddingTop="100dp"
         >
+
+        <com.shangtao.base.view.MulaTitleBar
+            android:id="@+id/mtb_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:bg_color="@color/color_ffffff"
+            app:title_text="Activity测试页"
+            />
+
 
         <Button
             android:id="@+id/btn_mvp_activity"

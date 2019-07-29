@@ -2,6 +2,7 @@ package com.shangtao.base.viewModel;
 
 import android.app.Application;
 import android.content.Intent;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
@@ -74,6 +75,7 @@ public  class BaseViewModel extends  MvvmViewModel {
         private SingleLiveEvent<String> showDialogEvent;
         private SingleLiveEvent<Void> dismissDialogEvent;
         private SingleLiveEvent<Transaction> pageJumpEvent;
+        private SingleLiveEvent<View> onClickEvent;
 
         public SingleLiveEvent<String> getShowDialogEvent() {
             return showDialogEvent = createLiveData(showDialogEvent);
@@ -85,6 +87,10 @@ public  class BaseViewModel extends  MvvmViewModel {
 
         public SingleLiveEvent<Transaction> getPageJumpEvent() {
             return pageJumpEvent = createLiveData(pageJumpEvent);
+        }
+
+        public SingleLiveEvent<View> getClickEvent() {
+            return onClickEvent = createLiveData(onClickEvent);
         }
 
         private SingleLiveEvent createLiveData(SingleLiveEvent liveData) {
