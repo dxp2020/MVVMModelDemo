@@ -91,7 +91,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     }
 
     //注册ViewModel与View的契约UI回调事件
-    private void registerLiveDataCallBack() {
+    public void registerLiveDataCallBack() {
         //加载对话框显示
         viewModel.getLiveData().getShowDialogEvent().observe(this, this::showDialog);
         //加载对话框消失

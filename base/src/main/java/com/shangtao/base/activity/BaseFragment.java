@@ -9,6 +9,7 @@ import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.mvvm.architecture.view.MvvmFragment;
 import com.shangtao.base.BaseApplication;
+import com.shangtao.base.R;
 import com.shangtao.base.dialog.LoadingDialog;
 import com.shangtao.base.model.jump.Static;
 import com.shangtao.base.model.utils.FixMemLeak;
@@ -16,7 +17,7 @@ import com.shangtao.base.model.utils.ImmersionBarUtil;
 import com.shangtao.base.viewModel.BaseViewModel;
 import com.squareup.leakcanary.RefWatcher;
 
-public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseViewModel>  extends MvvmFragment<V,VM> {
+public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseViewModel>  extends MvvmFragment<V,VM> implements View.OnClickListener{
 
     public BaseActivity mActivity;
     private Bundle savedInstanceState;
@@ -43,6 +44,11 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
 
         //私有的ViewModel与View的契约事件回调逻辑
         registerLiveDataCallBack();
+
+        //默认添加标题栏返回键监听
+        View backView = mRootView.findViewById(R.id.iv_back);
+        if (backView != null)
+            backView.setOnClickListener(this);
 
         initParam();
 
@@ -71,6 +77,18 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     public void dismissDialog() {
         if (loadingDialog != null && loadingDialog.isShowing()) {
             loadingDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if (id == R.id.iv_back) {
+            if (mActivity.getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                mActivity.finish();
+            } else {
+                mActivity.getSupportFragmentManager().popBackStack();
+            }
         }
     }
 

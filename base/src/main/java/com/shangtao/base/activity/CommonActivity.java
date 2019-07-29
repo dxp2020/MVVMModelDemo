@@ -76,6 +76,11 @@ public class CommonActivity extends BaseActivity<ActivityCommonBinding, BaseView
                     isReturn = true;
                 }
             }
+            if (fragment instanceof BaseWebFragment) {
+                if ( ((BaseWebFragment) fragment).onBackPressed() ) {
+                    isReturn = true;
+                }
+            }
         }
         if (isReturn) {
             return;

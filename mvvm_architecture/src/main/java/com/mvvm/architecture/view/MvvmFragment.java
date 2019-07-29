@@ -32,14 +32,20 @@ public abstract class MvvmFragment<V extends ViewDataBinding, VM extends MvvmVie
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
-        viewModelId = initVariableId();
-        viewModel = initViewModel();
-        binding.setVariable(viewModelId, viewModel);
-        //让ViewModel拥有View的生命周期感应
-        getLifecycle().addObserver(viewModel);
-        //注入RxLifecycle生命周期
-        viewModel.injectLifecycleProvider(this);
-        mRootView =  binding.getRoot();
+        if (binding!=null) {
+            viewModelId = initVariableId();
+            viewModel = initViewModel();
+            binding.setVariable(viewModelId, viewModel);
+            //让ViewModel拥有View的生命周期感应
+            getLifecycle().addObserver(viewModel);
+            //注入RxLifecycle生命周期
+            viewModel.injectLifecycleProvider(this);
+            mRootView =  binding.getRoot();
+        }else{
+            if (mRootView==null) {
+                mRootView = inflater.inflate(getLayoutId(), container, false);
+            }
+        }
         return mRootView;
     }
 

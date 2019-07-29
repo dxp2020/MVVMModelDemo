@@ -31,16 +31,18 @@ import com.shangtao.base.model.utils.FixMemLeak;
 import com.shangtao.base.model.utils.ImmersionBarUtil;
 import com.shangtao.base.model.utils.L;
 import com.shangtao.base.model.utils.WebViewSettings;
-import com.shangtao.base.view.MulaTitleBar;
+import com.shangtao.base.view.CommTitleBar;
 import com.shangtao.base.viewModel.BaseViewModel;
 import com.squareup.leakcanary.RefWatcher;
 
-public abstract class BaseWebFragment<V extends ViewDataBinding, VM extends BaseViewModel>  extends MvvmFragment<V,VM> {
+public abstract class BaseWebFragment<V extends ViewDataBinding, VM extends BaseViewModel>  extends MvvmFragment<V,VM> implements View.OnClickListener{
 
     public BaseActivity mActivity;
+
     private Bundle savedInstanceState;
     private LoadingDialog loadingDialog;
-    public MulaTitleBar titleBar;
+
+    public CommTitleBar titleBar;
     public WebView webView;
     public ProgressBar progressBar;
     public FrameLayout flContainer;
@@ -67,6 +69,12 @@ public abstract class BaseWebFragment<V extends ViewDataBinding, VM extends Base
         //私有的ViewModel与View的契约事件回调逻辑
         registerLiveDataCallBack();
 
+        //默认添加标题栏返回键监听
+        View backView = mRootView.findViewById(R.id.iv_back);
+        if (backView != null)
+            backView.setOnClickListener(this);
+
+        initWebView();
     }
 
     private void initWebView() {
@@ -177,14 +185,6 @@ public abstract class BaseWebFragment<V extends ViewDataBinding, VM extends Base
         }
     }
 
-    public boolean onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack();
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -201,8 +201,23 @@ public abstract class BaseWebFragment<V extends ViewDataBinding, VM extends Base
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if (id == R.id.iv_back) {
+            if (webView.canGoBack()) {
+                webView.goBack();
+            } else {
+                mActivity.finish();
+            }
+        }
+    }
+
     //注册ViewModel与View的契约UI回调事件
     private void registerLiveDataCallBack() {
+        if(viewModel==null){
+            return;
+        }
         //加载对话框显示
         viewModel.getLiveData().getShowDialogEvent().observe(this, this::showDialog);
         //加载对话框消失
@@ -228,6 +243,14 @@ public abstract class BaseWebFragment<V extends ViewDataBinding, VM extends Base
         if (loadingDialog != null && loadingDialog.isShowing()) {
             loadingDialog.dismiss();
         }
+    }
+
+    public boolean onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -10,9 +10,6 @@ import com.shangtao.base.binding.command.BindingCommand;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by goldze on 2017/6/16.
- */
 
 public class ViewAdapter {
     //防重复点击间隔(秒)

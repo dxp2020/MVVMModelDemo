@@ -6,7 +6,10 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
+import com.shangtao.base.activity.CommonWebFragment;
 import com.shangtao.base.binding.command.BindingCommand;
+import com.shangtao.base.model.bean.WebParam;
+import com.shangtao.base.model.jump.IFragmentParams;
 import com.shangtao.base.model.jump.Transaction;
 import com.shangtao.base.retrofit.SimpleSubscriber;
 import com.shangtao.base.viewModel.BaseViewModel;
@@ -23,7 +26,10 @@ public class TestActivityViewModel extends BaseViewModel {
     public ObservableField<String> weatherObservable = new ObservableField<>();
 
     public BindingCommand<View> buttonClickCommand = new BindingCommand<>(view -> {
-        if (view.getId() == R.id.btn_mvp_activity) {
+        if(view.getId() == R.id.iv_back){
+            getLiveData().getClickEvent().call(view);
+
+        } else if (view.getId() == R.id.btn_mvp_activity) {
             loadWeatherData("101310222");
 
         } else if (view.getId() == R.id.btn_mvp_fragment) {
@@ -31,6 +37,9 @@ public class TestActivityViewModel extends BaseViewModel {
 
         } else if (view.getId() == R.id.btn_mvp_dialog) {
             getLiveData().getPageJumpEvent().setValue(new Transaction(TestDialogFragment.class));
+
+        } else if (view.getId() == R.id.btn_mvp_webview) {
+            getLiveData().getPageJumpEvent().setValue(new Transaction(CommonWebFragment.class,new IFragmentParams<>(new WebParam("http://www.baidu.com"))));
 
         }
     });

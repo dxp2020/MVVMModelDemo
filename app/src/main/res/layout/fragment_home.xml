@@ -16,7 +16,7 @@
         android:orientation="vertical"
         >
 
-        <com.shangtao.base.view.MulaTitleBar
+        <com.shangtao.base.view.CommTitleBar
             android:id="@+id/mtb_title_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

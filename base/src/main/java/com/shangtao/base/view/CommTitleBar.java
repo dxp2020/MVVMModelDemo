@@ -18,7 +18,7 @@ import com.blankj.utilcode.util.BarUtils;
 import com.shangtao.base.R;
 
 
-public class MulaTitleBar extends RelativeLayout {
+public class CommTitleBar extends RelativeLayout {
 
     private ImageView btn_right;
     private ImageView iv_back;
@@ -32,23 +32,23 @@ public class MulaTitleBar extends RelativeLayout {
     private int textColor;
     private int bgColor;
 
-    public MulaTitleBar(Context context) {
+    public CommTitleBar(Context context) {
         this(context, null);
     }
 
-    public MulaTitleBar(Context context, AttributeSet attrs) {
+    public CommTitleBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.title_bar, this, true);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.mula_title_bar);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.comm_title_bar);
 
-        String rightText = a.getString(R.styleable.mula_title_bar_right_text);
-        String titleText = a.getString(R.styleable.mula_title_bar_title_text);
-        int backBtnSrc = a.getResourceId(R.styleable.mula_title_bar_back_btn_src, 0);
-        int rightBtnSrc = a.getResourceId(R.styleable.mula_title_bar_right_btn_src, 0);
-        int logoImgSrc = a.getResourceId(R.styleable.mula_title_bar_logo_img_src, 0);
-        bgColor = ContextCompat.getColor(context,a.getResourceId(R.styleable.mula_title_bar_bg_color, R.color.color_ffffff));
-        textColor = ContextCompat.getColor(context,a.getResourceId(R.styleable.mula_title_bar_text_color, R.color.color_333333));
-        bottomLineColor = ContextCompat.getColor(context,a.getResourceId(R.styleable.mula_title_bar_bottom_line_color, R.color.color_f3f3f3));
+        String rightText = a.getString(R.styleable.comm_title_bar_right_text);
+        String titleText = a.getString(R.styleable.comm_title_bar_title_text);
+        int backBtnSrc = a.getResourceId(R.styleable.comm_title_bar_back_btn_src, 0);
+        int rightBtnSrc = a.getResourceId(R.styleable.comm_title_bar_right_btn_src, 0);
+        int logoImgSrc = a.getResourceId(R.styleable.comm_title_bar_logo_img_src, 0);
+        bgColor = ContextCompat.getColor(context,a.getResourceId(R.styleable.comm_title_bar_bg_color, R.color.color_ffffff));
+        textColor = ContextCompat.getColor(context,a.getResourceId(R.styleable.comm_title_bar_text_color, R.color.color_333333));
+        bottomLineColor = ContextCompat.getColor(context,a.getResourceId(R.styleable.comm_title_bar_bottom_line_color, R.color.color_f3f3f3));
         a.recycle();
 
         initView();

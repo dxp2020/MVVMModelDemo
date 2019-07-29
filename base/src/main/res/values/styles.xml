@@ -22,4 +22,8 @@
         <item name="android:windowExitAnimation">@anim/dialog_exit_anim</item>
     </style>
 
+    <style name="progress_bor_horizontal" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_bar_horizontal</item>
+    </style>
+
 </resources>

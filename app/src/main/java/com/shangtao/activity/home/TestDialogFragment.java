@@ -1,5 +1,7 @@
 package com.shangtao.activity.home;
 
+import android.os.Bundle;
+
 import com.shangtao.base.BR;
 import com.shangtao.base.activity.BaseFragment;
 import com.shangtao.base.dialog.MessageDialog;

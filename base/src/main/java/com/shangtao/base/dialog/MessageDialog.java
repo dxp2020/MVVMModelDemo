@@ -21,6 +21,7 @@ public class MessageDialog extends BaseDialog<DialogMessageBinding, MessageDialo
 
     @Override
     protected void initParam() {
+        assert getArguments() != null;
         messageParam = (MessageParam) getArguments().getSerializable("MessageParam");
     }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="mula_title_bar">
+    <declare-styleable name="comm_title_bar">
         <attr name="back_btn_src" format="reference"/>
         <attr name="right_btn_src" format="reference"/>
         <attr name="logo_img_src" format="reference"/>
