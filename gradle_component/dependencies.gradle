@@ -40,7 +40,6 @@ ext {
             glide                 : "com.github.bumptech.glide:glide:3.7.0",
             flexlayout            : "com.github.mmin18:flexlayout:1.2.6",
             zxing                 : "com.google.zxing:core:3.3.0",
-            utilcode               : "com.blankj:utilcode:1.20.1",
             gson                  : 'com.google.code.gson:gson:2.7',
             okhttp                : 'com.squareup.okhttp3:okhttp:3.8.0',
 

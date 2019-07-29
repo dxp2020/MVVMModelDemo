@@ -75,7 +75,6 @@ dependencies {
     api rootProject.ext.OTHERDEPS.rxandroid2
 
     api rootProject.ext.OTHERDEPS.eventbus
-    api rootProject.ext.OTHERDEPS.utilcode
     api rootProject.ext.OTHERDEPS.glide
     api rootProject.ext.OTHERDEPS.flexlayout
     api rootProject.ext.OTHERDEPS.rxbinding

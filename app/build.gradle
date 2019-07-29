@@ -4,5 +4,5 @@ apply from: "${GRADLES.baseConfig}"
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':base')
+    implementation project(':st_base')
 }
