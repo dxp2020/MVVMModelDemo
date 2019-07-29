@@ -1,1 +1,1 @@
-include ':app', ':mvvm_architecture', ':base'
+include ':app', ':mvvm_architecture', ':base', ':lbs_location'

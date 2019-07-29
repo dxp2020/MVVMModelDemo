@@ -19,7 +19,7 @@ public class ViewAdapter {
      * requireAll 是意思是是否需要绑定全部参数, false为否
      * View的onClick事件绑定
      * onClickCommand 绑定的命令,
-     * isThrottleFirst 是否开启防止过快点击
+     * isThrottleFirst 是否开启防止过快点击 false为允许开启
      */
     @SuppressLint("CheckResult")
     @BindingAdapter(value = {"onClickCommand", "isThrottleFirst"}, requireAll = false)

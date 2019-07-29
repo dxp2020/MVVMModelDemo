@@ -48,8 +48,17 @@ android {
         enabled = true
     }
 
-    dependencies {
-        implementation fileTree(dir: 'libs', include: ['*.jar'])
-    }
+    productFlavors {
+        product {
+            versionNameSuffix ""
+        }
 
+        develop {
+            versionNameSuffix "_develop"
+        }
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
 }

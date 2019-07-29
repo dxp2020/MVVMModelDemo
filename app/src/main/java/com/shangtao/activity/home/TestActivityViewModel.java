@@ -49,11 +49,11 @@ public class TestActivityViewModel extends BaseViewModel {
                 new SimpleSubscriber<MainModel>(this) {
                     @Override
                     public void onSuccess(MainModel model) {
-                        MainModel.WeatherinfoBean weatherinfo = model.getWeatherinfo();
-                        String showData = getApplication().getResources().getString(R.string.city) + weatherinfo.getCity()
-                                + getApplication().getResources().getString(R.string.wd) + weatherinfo.getWD()
-                                + getApplication().getResources().getString(R.string.ws) + weatherinfo.getWS()
-                                + getApplication().getResources().getString(R.string.time) + weatherinfo.getTime();
+                        MainModel.WeatherInfoBean weatherInfo = model.getWeatherInfo();
+                        String showData = getApplication().getResources().getString(R.string.city) + weatherInfo.getCity()
+                                + getApplication().getResources().getString(R.string.wd) + weatherInfo.getWD()
+                                + getApplication().getResources().getString(R.string.ws) + weatherInfo.getWS()
+                                + getApplication().getResources().getString(R.string.time) + weatherInfo.getTime();
                         weatherObservable.set(showData);
                     }
                     @Override

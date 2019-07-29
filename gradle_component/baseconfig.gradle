@@ -56,10 +56,6 @@ android {
         develop {
             versionNameSuffix "_develop"
         }
-
-        local {
-            versionNameSuffix "_local"
-        }
     }
 }
 
@@ -81,7 +77,6 @@ dependencies {
     api rootProject.ext.OTHERDEPS.eventbus
     api rootProject.ext.OTHERDEPS.utilcode
     api rootProject.ext.OTHERDEPS.glide
-    api rootProject.ext.OTHERDEPS.glide_compiler
     api rootProject.ext.OTHERDEPS.flexlayout
     api rootProject.ext.OTHERDEPS.rxbinding
     api rootProject.ext.OTHERDEPS.rxpermissions

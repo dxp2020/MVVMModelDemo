@@ -37,8 +37,7 @@ ext {
 
             leakcanary            : 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2',
             eventbus              : "de.greenrobot:eventbus:3.0.0-beta1",
-            glide                 : "com.github.bumptech.glide:glide:4.8.0",
-            glide_compiler        : "com.github.bumptech.glide:compiler:4.8.0",
+            glide                 : "com.github.bumptech.glide:glide:3.7.0",
             flexlayout            : "com.github.mmin18:flexlayout:1.2.6",
             zxing                 : "com.google.zxing:core:3.3.0",
             utilcode               : "com.blankj:utilcode:1.20.1",
