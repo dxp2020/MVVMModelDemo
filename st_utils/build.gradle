@@ -3,4 +3,6 @@ apply from: "${GRADLES.libConfig}"
 
 dependencies {
     api rootProject.ext.OTHERDEPS.gson
+    api rootProject.ext.SUPPORTDEPS.fragment
+    api rootProject.ext.SUPPORTDEPS.design
 }

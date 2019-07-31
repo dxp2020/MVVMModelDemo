@@ -41,6 +41,9 @@ public class TestActivityViewModel extends BaseViewModel {
         } else if (view.getId() == R.id.btn_mvp_webview) {
             getLiveData().getPageJumpEvent().setValue(new Transaction(CommonWebFragment.class,new IFragmentParams<>(new WebParam("http://www.baidu.com"))));
 
+        } else if (view.getId() == R.id.btn_mvp_permission) {
+            getLiveData().getClickEvent().call(view);
+
         }
     });
 
@@ -49,7 +52,7 @@ public class TestActivityViewModel extends BaseViewModel {
                 new SimpleSubscriber<MainModel>(this) {
                     @Override
                     public void onSuccess(MainModel model) {
-                        MainModel.WeatherInfoBean weatherInfo = model.getWeatherInfo();
+                        MainModel.WeatherinfoBean weatherInfo = model.getWeatherinfo();
                         String showData = getApplication().getResources().getString(R.string.city) + weatherInfo.getCity()
                                 + getApplication().getResources().getString(R.string.wd) + weatherInfo.getWD()
                                 + getApplication().getResources().getString(R.string.ws) + weatherInfo.getWS()

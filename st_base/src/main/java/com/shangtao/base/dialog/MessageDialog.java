@@ -39,6 +39,7 @@ public class MessageDialog extends BaseDialog<DialogMessageBinding, MessageDialo
         if(messageParam.isHiddenCancelButton()){
             binding.tvCancel.setVisibility(View.GONE);
             binding.tvCenterLine.setVisibility(View.GONE);
+            binding.tvConfirm.setBackgroundResource(R.drawable.selector_button);
         }
 
         binding.tvTitle.setTextSize(messageParam.getTitleTextSize());

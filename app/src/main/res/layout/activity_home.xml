@@ -21,16 +21,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:bg_color="@color/color_ffffff"
-            app:title_text="Activity测试页"
+            app:title_text="MVVM架构测试"
             binding:onClickCommand="@{viewModel.buttonClickCommand}"
             />
-
 
         <Button
             android:id="@+id/btn_mvp_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mvvm Activity Test"
+            android:text="Test Activity"
             android:textAllCaps="false"
             binding:onClickCommand="@{viewModel.buttonClickCommand}"
             />
@@ -39,7 +38,7 @@
             android:id="@+id/btn_mvp_fragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mvvm Fragment Test"
+            android:text="Test Fragment"
             android:textAllCaps="false"
             binding:onClickCommand="@{viewModel.buttonClickCommand}"
             />
@@ -48,7 +47,7 @@
             android:id="@+id/btn_mvp_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mvvm Dialog Test"
+            android:text="Test Dialog"
             android:textAllCaps="false"
             binding:onClickCommand="@{viewModel.buttonClickCommand}"
             />
@@ -57,17 +56,26 @@
             android:id="@+id/btn_mvp_webview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mvvm WebView Test"
+            android:text="Test WebView"
+            android:textAllCaps="false"
+            binding:onClickCommand="@{viewModel.buttonClickCommand}"
+            />
+
+        <Button
+            android:id="@+id/btn_mvp_permission"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test Permission "
             android:textAllCaps="false"
             binding:onClickCommand="@{viewModel.buttonClickCommand}"
             />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:foregroundGravity="center_horizontal"
             android:layout_margin="20dp"
             android:text="@{viewModel.weatherObservable}"
+            android:layout_gravity="center_horizontal"
             />
     </LinearLayout>
 

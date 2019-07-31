@@ -26,4 +26,31 @@
         <item name="android:progressDrawable">@drawable/progress_bar_horizontal</item>
     </style>
 
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="selectableItemBackground">@drawable/selectable_item_background</item>
+        <item name="android:selectableItemBackground">@drawable/selectable_item_background</item>
+    </style>
+
+    <style name="Theme.splash" parent="android:Theme">
+        <item name="android:windowNoTitle">true</item>
+        <!--此属性用在启动页避免启动发生黑屏，但应用启动会偏慢 ,8.0手机在启动页可能会崩溃，已在BaseActivity处理-->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.translucent" parent="BaseTheme">
+        <!--此属性可使窗口背景透明，但设置的切换动画会失效，可在代码中动态设置切换动画，否则会跟随系统-->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+    </style>
+
+    <style name="Theme.application" parent="BaseTheme">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
 </resources>

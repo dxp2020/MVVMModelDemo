@@ -32,7 +32,7 @@ public class TestFragmentViewModel extends BaseViewModel {
                 new SimpleSubscriber<MainModel>(this) {
                     @Override
                     public void onSuccess(MainModel model) {
-                        MainModel.WeatherInfoBean weatherinfo = model.getWeatherInfo();
+                        MainModel.WeatherinfoBean weatherinfo = model.getWeatherinfo();
                         String showData = getApplication().getResources().getString(R.string.city) + weatherinfo.getCity()
                                 + getApplication().getResources().getString(R.string.wd) + weatherinfo.getWD()
                                 + getApplication().getResources().getString(R.string.ws) + weatherinfo.getWS()

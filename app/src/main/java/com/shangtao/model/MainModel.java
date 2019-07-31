@@ -2,17 +2,17 @@ package com.shangtao.model;
 
 public class MainModel {
 
-    private WeatherInfoBean weatherInfo;
+    private WeatherinfoBean weatherinfo;
 
-    public WeatherInfoBean getWeatherInfo() {
-        return weatherInfo;
+    public WeatherinfoBean getWeatherinfo() {
+        return weatherinfo;
     }
 
-    public void setWeatherInfo(WeatherInfoBean weatherInfo) {
-        this.weatherInfo = weatherInfo;
+    public void setWeatherinfo(WeatherinfoBean weatherinfo) {
+        this.weatherinfo = weatherinfo;
     }
 
-    public static class WeatherInfoBean {
+    public static class WeatherinfoBean {
         private String city;
         private String cityid;
         private String temp;

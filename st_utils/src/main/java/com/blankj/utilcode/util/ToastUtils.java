@@ -111,7 +111,7 @@ public final class ToastUtils {
      *
      * @param text The text.
      */
-    public static void showShort(final CharSequence text) {
+    public static void show(final CharSequence text) {
         show(text == null ? NULL : text, Toast.LENGTH_SHORT);
     }
 
@@ -120,7 +120,7 @@ public final class ToastUtils {
      *
      * @param resId The resource id for text.
      */
-    public static void showShort(@StringRes final int resId) {
+    public static void show(@StringRes final int resId) {
         show(resId, Toast.LENGTH_SHORT);
     }
 
@@ -130,7 +130,7 @@ public final class ToastUtils {
      * @param resId The resource id for text.
      * @param args  The args.
      */
-    public static void showShort(@StringRes final int resId, final Object... args) {
+    public static void show(@StringRes final int resId, final Object... args) {
         show(resId, Toast.LENGTH_SHORT, args);
     }
 
@@ -140,7 +140,7 @@ public final class ToastUtils {
      * @param format The format.
      * @param args   The args.
      */
-    public static void showShort(final String format, final Object... args) {
+    public static void show(final String format, final Object... args) {
         show(format, Toast.LENGTH_SHORT, args);
     }
 
